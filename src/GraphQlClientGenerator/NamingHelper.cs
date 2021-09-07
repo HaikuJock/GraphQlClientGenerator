@@ -165,7 +165,9 @@ namespace GraphQlClientGenerator
         /// </remarks>
         public static string ToSnakeCase(string name)
         {
-            return ToSnake.Replace(name, "_");
+            return (name.Contains('_') || name.All(c => char.IsLower(c)) || name.All(c => char.IsUpper(c)))
+                ? name
+                : ToSnake.Replace(name, "_");
         }
     }
 }
