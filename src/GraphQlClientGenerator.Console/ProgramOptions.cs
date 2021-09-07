@@ -20,5 +20,6 @@ namespace GraphQlClientGenerator.Console
         public IdTypeMapping IdTypeMapping { get; set; }
         public FloatTypeMapping FloatTypeMapping { get; set; }
         public JsonPropertyGenerationOption JsonPropertyAttribute { get; set; }
+        public EnumTypeNaming EnumTypeNaming { get; set; }
     }
 }

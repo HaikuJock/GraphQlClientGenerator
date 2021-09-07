@@ -52,7 +52,8 @@ namespace GraphQlClientGenerator.Console
                     MemberAccessibility = options.MemberAccessibility,
                     IdTypeMapping = options.IdTypeMapping,
                     FloatTypeMapping = options.FloatTypeMapping,
-                    JsonPropertyGeneration = options.JsonPropertyAttribute
+                    JsonPropertyGeneration = options.JsonPropertyAttribute,
+                    EnumTypeNaming = options.EnumTypeNaming
                 };
 
             if (!KeyValueParameterParser.TryGetCustomClassMapping(options.ClassMapping, out var customMapping, out var customMappingParsingErrorMessage))
