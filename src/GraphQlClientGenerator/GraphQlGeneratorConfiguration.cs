@@ -100,6 +100,7 @@ namespace GraphQlClientGenerator
             MemberAccessibility = MemberAccessibility.Public;
             JsonPropertyGeneration = JsonPropertyGenerationOption.CaseInsensitive;
             PropertyGeneration = PropertyGenerationOption.AutoProperty;
+            EnumTypeNaming = EnumTypeNaming.CSharp;
         }
 
         public string GeneratePropertyAccessors(string backingFieldName, ScalarFieldTypeDescription backingFieldType)

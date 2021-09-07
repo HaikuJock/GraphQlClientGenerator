@@ -41,7 +41,8 @@ namespace GraphQlClientGenerator.Console
                     classMappingOption,
                     new Option<IdTypeMapping>("--idTypeMapping", () => IdTypeMapping.Guid, "Specifies the .NET type generated for GraphQL ID data type"),
                     new Option<FloatTypeMapping>("--floatTypeMapping", () => FloatTypeMapping.Decimal, "Specifies the .NET type generated for GraphQL Float data type"),
-                    new Option<JsonPropertyGenerationOption>("--jsonPropertyAttribute", () => JsonPropertyGenerationOption.CaseInsensitive, "Specifies the condition for using \"JsonPropertyAttribute\"")
+                    new Option<JsonPropertyGenerationOption>("--jsonPropertyAttribute", () => JsonPropertyGenerationOption.CaseInsensitive, "Specifies the condition for using \"JsonPropertyAttribute\""),
+                    new Option<EnumTypeNaming>("--enumTypeNaming", () => EnumTypeNaming.CSharp, "The casing of enumeration values.")
                 };
 
             command.TreatUnmatchedTokensAsErrors = true;
