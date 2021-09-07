@@ -156,5 +156,16 @@ namespace GraphQlClientGenerator
 
             return hasLowerLetters && hasUpperLetters ? name : builder.ToString();
         }
+
+        private static readonly Regex ToSnake = new Regex("(?<!^)(?=[A-Z])");
+
+        /// <remarks>
+        /// https://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
+        /// Upper and lower-casing left to user
+        /// </remarks>
+        public static string ToSnakeCase(string name)
+        {
+            return ToSnake.Replace(name, "_");
+        }
     }
 }

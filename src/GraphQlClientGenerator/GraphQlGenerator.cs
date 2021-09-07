@@ -884,6 +884,14 @@ using Newtonsoft.Json.Linq;
                 _ => throw new InvalidOperationException($"'{_configuration.IdTypeMapping}' not supported")
             };
 
+        private string GetEnumValueIdentifierName(string originalName) =>
+            _configuration.EnumTypeNaming switch
+            {
+                EnumTypeNaming.CSharp => NamingHelper.ToCSharpEnumName(originalName),
+                EnumTypeNaming.UpperSnakeCase => NamingHelper.ToSnakeCase(originalName).ToUpper(),
+                _ => throw new InvalidOperationException($"'{_configuration.EnumTypeNaming}' not supported")
+            };
+
         private static InvalidOperationException ListItemTypeResolutionFailedException(string typeName, string fieldName) =>
             FieldTypeResolutionFailedException(typeName, fieldName, "list item type was not resolved; nested collections too deep");
 
@@ -1509,11 +1517,11 @@ using Newtonsoft.Json.Linq;
                 GenerateCodeComments(writer, enumValue.Description, context.Indentation + 4);
                 writer.Write(indentation);
                 writer.Write("    ");
-                var netIdentifier = NamingHelper.ToCSharpEnumName(enumValue.Name);
-                if (netIdentifier != enumValue.Name)
+                var identifier = GetEnumValueIdentifierName(enumValue.Name);
+                if (identifier != enumValue.Name)
                     writer.Write($"[EnumMember(Value = \"{enumValue.Name}\")] ");
 
-                writer.Write(netIdentifier);
+                writer.Write(identifier);
 
                 if (i < enumValues.Count - 1)
                     writer.Write(",");

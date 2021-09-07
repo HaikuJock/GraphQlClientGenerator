@@ -291,6 +291,30 @@ namespace GraphQlClientGenerator.Test
             stringBuilder.ToString().ShouldBe(expectedDataClasses);
         }
 
+        [Fact]
+        public void GenerateEnumsUppercased()
+        {
+            // System.Text.Json does not support EnumMember. GraphQL enums are upper-cased by convention.
+            var configuration =
+                new GraphQlGeneratorConfiguration
+                {
+                    EnumTypeNaming = EnumTypeNaming.UpperSnakeCase,
+                    IntegerTypeMapping = IntegerTypeMapping.Int64,
+                    FloatTypeMapping = FloatTypeMapping.Double,
+                    BooleanTypeMapping = BooleanTypeMapping.Custom,
+                    IdTypeMapping = IdTypeMapping.String,
+                    GeneratePartialClasses = false,
+                    PropertyGeneration = PropertyGenerationOption.BackingField
+                };
+
+            configuration.ScalarFieldTypeMappingProvider = new TestCustomBooleanTypeMappingProvider();
+
+            var stringBuilder = new StringBuilder();
+            new GraphQlGenerator(configuration).Generate(CreateGenerationContext(stringBuilder, TestSchema, GeneratedObjectType.DataClasses));
+            var expectedDataClasses = GetTestResource("ExpectedUpperCasedEnums");
+            stringBuilder.ToString().ShouldBe(expectedDataClasses);
+        }
+
         private class TestCustomBooleanTypeMappingProvider : IScalarFieldTypeMappingProvider
         {
             public ScalarFieldTypeDescription GetCustomScalarFieldType(GraphQlGeneratorConfiguration configuration, GraphQlType baseType, GraphQlTypeBase valueType, string valueName) =>

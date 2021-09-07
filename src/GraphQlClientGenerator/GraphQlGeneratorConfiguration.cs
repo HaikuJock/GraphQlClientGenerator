@@ -53,7 +53,13 @@ namespace GraphQlClientGenerator
         /// </summary>
         /// <remarks>For using custom .NET data type <code>Custom</code> option must be used. </remarks>
         public IdTypeMapping IdTypeMapping { get; set; } = IdTypeMapping.Guid;
-        
+
+        /// <summary>
+        /// The format of enumerated type values
+        /// </summary>
+        /// <remarks>Provided to support capitalized enumerations for System.Text.Json where EnumMember attribute is not supported.</remarks>
+        public EnumTypeNaming EnumTypeNaming { get; set; } = EnumTypeNaming.CSharp;
+
         public PropertyGenerationOption PropertyGeneration { get; set; } = PropertyGenerationOption.AutoProperty;
 
         public JsonPropertyGenerationOption JsonPropertyGeneration { get; set; } = JsonPropertyGenerationOption.CaseInsensitive;
@@ -157,6 +163,12 @@ namespace GraphQlClientGenerator
         String,
         Object,
         Custom
+    }
+
+    public enum EnumTypeNaming
+    {
+        CSharp,
+        UpperSnakeCase
     }
 
     public enum MemberAccessibility
